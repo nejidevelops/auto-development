@@ -1,6 +1,12 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-API_KEY = '1bec01f8248a76771f8906b4590de8fe'
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve API key from environment variable
+API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
 
 # List of African cities to get weather information for
 cities = ["Cairo", "Lagos", "Nairobi", "Johannesburg", "Accra", "Kinshasa", "Addis Ababa", "Khartoum", "Algiers", "Casablanca"]
