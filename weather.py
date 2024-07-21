@@ -1,12 +1,16 @@
 import requests
 import os
 from dotenv import load_dotenv
+import pyttsx3
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Retrieve API key from environment variable
 API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
+
+# Initialize the TTS engine
+engine = pyttsx3.init()
 
 # List of African cities to get weather information for
 cities = ["Cairo", "Lagos", "Nairobi", "Johannesburg", "Accra", "Kinshasa", "Addis Ababa", "Khartoum", "Algiers", "Casablanca"]
@@ -17,7 +21,7 @@ def get_weather_data(city):
     response = requests.get(complete_url)
     return response.json()
 
-def print_weather_info(city, weather_data):
+def speak_weather_info(city, weather_data):
     if weather_data['cod'] == 200:
         main = weather_data['main']
         wind = weather_data['wind']
@@ -28,20 +32,28 @@ def print_weather_info(city, weather_data):
         humidity = main['humidity']
         wind_speed = wind['speed']
         
-        print(f"Weather in {city}:")
-        print(f"  Temperature: {temperature}°C")
-        print(f"  Feels Like: {feels_like}°C")
-        print(f"  Humidity: {humidity}%")
-        print(f"  Wind Speed: {wind_speed} m/s")
-        print(f"  Description: {weather_desc.capitalize()}")
-        print()
+        weather_info = (
+            f"Weather in {city}: "
+            f"Temperature is {temperature} degrees Celsius. "
+            f"It feels like {feels_like} degrees Celsius. "
+            f"Humidity is {humidity} percent. "
+            f"Wind speed is {wind_speed} meters per second. "
+            f"Description: {weather_desc.capitalize()}."
+        )
+        
+        print(weather_info)
+        engine.say(weather_info)
+        engine.runAndWait()
     else:
-        print(f"Could not retrieve weather data for {city}")
+        error_message = f"Could not retrieve weather data for {city}"
+        print(error_message)
+        engine.say(error_message)
+        engine.runAndWait()
 
 def main():
     for city in cities:
         weather_data = get_weather_data(city)
-        print_weather_info(city, weather_data)
+        speak_weather_info(city, weather_data)
 
 if __name__ == "__main__":
     main()
