@@ -15,13 +15,13 @@ echo "Directory '$DIRECTORY' found. Checking files..."
 declare -A base_filenames
 
 echo "Identifying and deleting duplicate files (if any)..."
-for filepath in "$DIRECTORY"/whatsapp*.mpeg; do
+for filepath in "$DIRECTORY"/WhatsApp*.mpeg; do
     # Check if the file exists to avoid processing non-existent files
     if [[ -f "$filepath" ]]; then
         filename=$(basename "$filepath")
         echo "Found file: $filename"  # Print all found files for visibility
 
-        # Extract the base filename (e.g., remove "(1)" and ".mpeg" from "whatsapp (1).mpeg")
+        # Extract the base filename (e.g., remove "(1)" and ".mpeg" from "WhatsApp Audio (1).mpeg")
         base_name="${filename%% *}"  # Get the base name without duplicates
 
         if [[ -n "${base_filenames[$base_name]}" ]]; then

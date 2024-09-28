@@ -19,9 +19,9 @@ else:
     for filename in os.listdir(directory):
         print(f"Found file: {filename}")  # Print all found files for visibility
 
-        # Check if the file is an mpeg file starting with "whatsapp"
-        if filename.startswith("whatsapp") and filename.endswith(".mpeg"):
-            # Extract the base filename (e.g., remove "(1)" and ".mpeg" from "whatsapp (1).mpeg")
+        # Check if the file is an mpeg file starting with "WhatsApp"
+        if filename.startswith("WhatsApp") and filename.endswith(".mpeg"):
+            # Extract the base filename
             base_name_match = re.match(r"^(.*?)( \(\d+\))?\.mpeg$", filename)
             if base_name_match:
                 base_name = base_name_match.group(1)
