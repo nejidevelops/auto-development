@@ -12,14 +12,18 @@ def send_email_update(subject, body, to_email, from_email, smtp_server, smtp_por
     msg['To'] = to_email
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
-    
+
     try:
+        print("Connecting to SMTP server...")
         server = smtplib.SMTP(smtp_server, smtp_port)
+        server.set_debuglevel(1)  # Enable debugging output
         server.starttls()
+        print("Logging in...")
         server.login(smtp_user, smtp_password)
+        print("Sending email...")
         server.sendmail(from_email, to_email, msg.as_string())
         server.quit()
-        print("Email sent successfully")
+        print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {e}")
 
@@ -52,12 +56,12 @@ def main():
     loop.run()
 
 # Set up your email credentials and recipient
-to_email = "recipient@example.com"
-from_email = "your_email@example.com"
-smtp_server = "smtp.example.com"
+to_email = "newtonombese1@gmail.com"
+from_email = "newtonombese1@gmail.com"
+smtp_server = "smtp.gmail.com"
 smtp_port = 587
-smtp_user = "your_email@example.com"
-smtp_password = "your_email_password"
+smtp_user = "newtonombese1@gmail.com"
+smtp_password = "grby pgby jldk ojgd"
 
 # Start monitoring lock events
 if __name__ == "__main__":
