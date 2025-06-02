@@ -19,3 +19,4 @@ notify-send "🖥️ System Status" "$MESSAGE"
 
 # Optional: Log to file
 echo -e "$(date):\n$MESSAGE\n" >> ~/system_info_log.txt
+echo "$MESSAGE" | python3 ./send_email.py
